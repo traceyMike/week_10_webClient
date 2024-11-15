@@ -1,43 +1,82 @@
 <script setup>
 import { ref } from 'vue'
 
-defineProps({
-  msg: String,
-})
+// BodyMassIndexForm.vue does not receive props from App.vue
+//defineProps({
+//  msg: String,
+//})
 
-const count = ref(0)
+// add reactive variables for height and weight - height in meters weight in kilograms
+const height = ref('')
+const weight = ref('')
+
+// define stats-entered event emitter
+const emit = defineEmits(['stats-entered'])
+
+// function to emit height weight data
+function submitStats() {
+  emit('stats-entered', { height: Number(height.value), weight: Number(weight.value) })
+}
+
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
 
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
-  </div>
+  <div class="form-container">
+  
+  <h2>Enter you details!</h2>
+  
+  
+  <!--height input-->
+    <label>
+      Height (meters):
+      <input v-model="height" type="number" placeholder="Enter height (in meters)" />
+    </label>
+    <!--weight input-->
+    <label>
+      Weight: (in kilograms):
+      <input v-model="weight" type="number" placeholder="Enter weight (in kilograms)" />
+    </label>
 
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Learn more about IDE Support for Vue in the
-    <a
-      href="https://vuejs.org/guide/scaling-up/tooling.html#ide-support"
-      target="_blank"
-      >Vue Docs Scaling up Guide</a
-    >.
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+      <!--button to submit height and weight-->
+      <button @click="submitStats">Calculate</button>
+      
+    </div>
+
 </template>
 
-<style scoped>
-.read-the-docs {
-  color: #888;
+<script>
+import { ref } from 'vue';
+
+// add reactive variables for height and weight
+const height = ref('')
+const weight = ref('')
+
+// define stats-entered event emitter
+const emit = defineEmits(['stats-entered']);
+
+// function - emit height and weight data
+function submitStats() {
+  emit('stats-entered', { height: Number(height.value), weight: Number(weight.value) })
 }
+
+</script>
+
+<style scoped>
+
+.form-container {
+  border: 3px solid red;
+  padding: 10px;
+  text-align: center;
+}
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+button {
+  display: block;
+  margin-top: 10px
+}
+
+
 </style>
