@@ -45,22 +45,7 @@ function submitStats() {
 
 </template>
 
-<script>
-import { ref } from 'vue';
 
-// add reactive variables for height and weight
-const height = ref('')
-const weight = ref('')
-
-// define stats-entered event emitter
-const emit = defineEmits(['stats-entered']);
-
-// function - emit height and weight data
-function submitStats() {
-  emit('stats-entered', { height: Number(height.value), weight: Number(weight.value) })
-}
-
-</script>
 
 <style scoped>
 
