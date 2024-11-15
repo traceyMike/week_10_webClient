@@ -22,7 +22,7 @@ function handleStatsEntered({ height, weight }) {
 
   <h1>Body Mass Index Calculator</h1>
   <!--bmi form component with event listener-->
-  <BodyMassIndexForm @stats-entered="handleStatsEntered"/>
+  <BodyMassIndexForm v-on:stats-entered="handleStatsEntered"/>
 
   <!--display calculated BMI result-->
   <p v-if="bmiResult !== null">Your BMI: {{ bmiResult }}</p>
